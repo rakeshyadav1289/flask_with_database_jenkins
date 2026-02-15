@@ -22,7 +22,7 @@ pipeline {
 
         stage('Test App') {
             steps {
-                sh 'curl --fail http://192.168.0.154:5000 || exit 1'
+                sh 'curl --fail http://192.168.0.154:5000/register || exit 1'
             }
         }
     }
