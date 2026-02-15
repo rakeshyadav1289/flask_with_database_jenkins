@@ -1,22 +1,35 @@
-pipeline
-{
+pipeline {
     agent any
 
     stages {
-        stage('git clone') {
+        stage('Checkout') {
             steps {
-                echo 'git cloning...'
-                // Add your build commands here
-                git branch: 'main', url: 'https://github.com/rakeshyadav1289/dummy.git'
+                git branch: 'main', url: 'git@github.com:username/flask-app.git'
+            }
+        }
 
-            }
-        }
-        stage('build') {
+        stage('Build Docker Images') {
             steps {
-                echo 'building...'
-                // Add your build commands here
+                sh 'docker compose build'
             }
         }
-        
+
+        stage('Run Containers') {
+            steps {
+                sh 'docker compose up -d'
+            }
+        }
+
+        stage('Test App') {
+            steps {
+                sh 'curl --fail http://localhost:5000 || exit 1'
+            }
+        }
+    }
+
+    post {
+        always {
+            sh 'docker compose down'
+        }
     }
 }
