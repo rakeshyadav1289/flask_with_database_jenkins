@@ -38,22 +38,13 @@ pipeline {
 
     post {
         always {
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
+:
            sh 'docker compose down'
 	 
-=======
-            sh 'docker compose down'
->>>>>>> parent of 6107f20 (finally code working)
-=======
-            sh 'docker compose down'
->>>>>>> parent of 6107f20 (finally code working)
-=======
-            sh 'docker compose down'
->>>>>>> parent of 6107f20 (finally code working)
+
         }
     }
 }
+
 
 
