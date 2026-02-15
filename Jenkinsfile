@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'git@github.com:username/flask-app.git'
+                git branch: 'main', url: 'git@github.com:rakeshyadav1289/flask_with_database_jenkins.git'
             }
         }
 
@@ -33,3 +33,4 @@ pipeline {
         }
     }
 }
+
