@@ -21,10 +21,14 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: rootpassword
       MYSQL_DATABASE: flask_users
+      MYSQL_USER: flaskuser
+      MYSQL_PASSWORD: flaskpass
+
     ports:
       - "3306:3306"
     volumes:
       - mysql_data:/var/lib/mysql
 
 volumes:
-  mysql_data:
+    - mysql_data:/var/lib/mysql
+    - ./init.sql:/docker-entrypoint-initdb.d/init.sql
