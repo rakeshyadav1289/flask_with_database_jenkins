@@ -22,7 +22,16 @@ pipeline {
 
         stage('Test App') {
             steps {
-                sh 'curl --fail http://192.168.0.154:5000/register || exit 1'
+                //sh 'curl --fail http://192.168.0.154:5000/register || exit 1'
+		sh '''
+		        for i in {1..10}; do
+		          curl --fail http://localhost:5000/register && exit 0
+		          echo "Waiting for Flask..."
+		          sleep 5
+		        done
+		        exit 1
+		        '''
+
             }
         }
     }
