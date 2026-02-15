@@ -1,33 +1,30 @@
-version: "3.8"
+version: "3.9"
 
 services:
   web:
     build: .
-    container_name: flask_app
+    container_name: flask_app       # <-- mapped name
     ports:
       - "5000:5000"
     depends_on:
       - db
-    environment:
-      - MYSQL_HOST=db
-      - MYSQL_USER=root
-      - MYSQL_PASSWORD=rootpassword
-      - MYSQL_DB=flask_users
+    volumes:
+      - .:/app
 
   db:
-  image: mysql:8.0
-  container_name: mysql_db
-  restart: always
-  environment:
-    MYSQL_ROOT_PASSWORD: rootpassword
-    MYSQL_DATABASE: flask_users
-    MYSQL_USER: flaskuser
-    MYSQL_PASSWORD: flaskpass
-  ports:
-    - "3306:3306"
-  volumes:
-    # Persist database data
-    - mysql_data:/var/lib/mysql
-    # Run init.sql automatically at first startup
-    - ./init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    image: mysql:8.0
+    container_name: mysql_db        # <-- mapped name
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: flask_users
+      MYSQL_USER: flaskuser
+      MYSQL_PASSWORD: flaskpass
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql:ro
 
+volumes:
+  mysql_data:

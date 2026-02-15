@@ -8,3 +8,8 @@ CREATE TABLE IF NOT EXISTS users (
 -- Insert admin user with bcrypt hash for "admin123"
 INSERT INTO users (username, password, role)
 VALUES ('admin', '$2b$12$KIXQ6nXWZpQ4Y5YwXQnY9uYwFZk9vZpYk9uZkYwFZk9vZpYk9u', 'admin');
+
+CREATE USER 'flaskuser'@'%' IDENTIFIED BY 'flaskpass';
+GRANT ALL PRIVILEGES ON flask_users.* TO 'flaskuser'@'%';
+FLUSH PRIVILEGES;
+
